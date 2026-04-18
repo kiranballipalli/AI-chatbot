@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexus · AI Assistant</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Highlight.js & Marked -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <button class="new-chat-btn" id="newChatBtn">
+                    <i class="fas fa-plus"></i>
+                    <span>New Chat</span>
+                </button>
+            </div>
+            <div class="chat-history" id="chatHistory">
+                <div class="history-item active">
+                    <i class="fas fa-message"></i>
+                    <span>Current Session</span>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="usernameDisplay">User</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <div class="main-area">
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="brand">
+                        <i class="fas fa-brain"></i>
+                        <h1>Nexus AI</h1>
+                    </div>
+                </div>
+                <div class="top-bar-right">
+                    <select id="modelSelect" class="model-dropdown" title="Select AI Model">
+                        <option value="llama3">Llama 3</option>
+                        <option value="codellama">Code Llama</option>
+                        <option value="mistral">Mistral</option>
+                        <option value="phi3">Phi-3</option>
+                    </select>
+                    <label class="stream-toggle" title="Stream responses">
+                        <input type="checkbox" id="streamToggle" checked>
+                        <i class="fas fa-water"></i>
+                    </label>
+                    <button class="icon-btn" id="exportBtn" title="Export as Markdown">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <span class="status-badge">
+                        <span class="status-dot"></span>
+                        Ollama
+                    </span>
+                    <button class="icon-btn" id="themeToggle" title="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="icon-btn" id="logoutBtn" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <main class="chat-container" id="chatContainer">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message welcome-message">
+                        <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <h2>Welcome to Nexus AI</h2>
+                                <p>I'm your private, offline AI assistant powered by Ollama.</p>
+                                <div class="quick-actions">
+                                    <button class="quick-action" data-prompt="Explain quantum computing in simple terms">🔬 Explain quantum computing</button>
+                                    <button class="quick-action" data-prompt="Write a Python function to reverse a string">🐍 Write Python code</button>
+                                    <button class="quick-action" data-prompt="Give me a productivity tip">💡 Productivity tip</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="loadingIndicator" class="loading-indicator hidden">
+                    <div class="typing-indicator"><span></span><span></span><span></span></div>
+                    <span>AI is thinking...</span>
+                </div>
+            </main>
+
+            <footer class="input-area">
+                <div class="input-wrapper">
+                    <div class="input-container">
+                        <textarea id="messageInput" class="message-input" placeholder="Message Nexus AI..." rows="1" spellcheck="false"></textarea>
+                        <div class="input-actions">
+                            <button id="clearInputBtn" class="icon-btn" title="Clear input"><i class="fas fa-times"></i></button>
+                            <button id="sendBtn" class="send-btn" title="Send message"><i class="fas fa-arrow-up"></i></button>
+                        </div>
+                    </div>
+                    <div class="input-footer">
+                        <span class="char-counter" id="charCounter">0/5000</span>
+                        <span class="shortcut-hint">Press ⌘+Enter to send</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
